@@ -41,12 +41,32 @@ def get_sum_total(dir: Node) -> int:
         return total
     return total + dir.size
 
-def part_one_solution() -> None:
+def get_big_enough_arr(dir: Node) -> list[int]:
+    if not dir.children:
+        return []
+    dir_size_arr = []
+    for sub_dir in dir.children:
+        dir_size_arr.extend(get_big_enough_arr(dir.children[sub_dir]))
+    if dir.size >= 1072511:
+        dir_size_arr.extend([dir.size])
+    return dir_size_arr
+    
+
+def solution() -> None:
+    #part 1
     file_tree = create_directory_tree()
     set_dir_sizes(file_tree)
     result = get_sum_total(file_tree)
-    print(result) 
-
+    print(f'Answer to part 1: {result}')
+    
+    #part 2
+    unused_space = 70000000 - file_tree.size
+    print(f'Unused space: {unused_space}')
+    space_needed = 30000000 - unused_space
+    print(f'Space needed to be freed up: {space_needed}')
+    dir_size_arr = get_big_enough_arr(file_tree)
+    dir_size_arr.sort()
+    print(f'Answer to part 2: {dir_size_arr[0]}')
 
 if __name__ == '__main__':
-    part_one_solution()
+    solution()
