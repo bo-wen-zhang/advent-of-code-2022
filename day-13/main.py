@@ -9,6 +9,12 @@ class Node(object):
         self.children = []
     def add_child(self, node: 'Node') -> None:
         self.children.append(node)  
+    
+    def __lt__(self, other):
+        return right_order(self, other)
+    
+    def __gt__(self, other):
+        return not right_order(self, other)
         
      
 #my solution is basically build a pair of trees using the input text
@@ -89,6 +95,21 @@ def build_tree(line: str) -> Node:
             current_num_str += line[i]
     return tree
     
+def part_two_solution() -> None:
+    with open('input.txt') as input_file:
+        lines = input_file.readlines()
+    
+    packets_arr = []
+    for line in lines:
+        if (p:=line.strip()) != '':
+            packets_arr.append(build_tree(p))
+    divider_one = build_tree('[[2]]')
+    divider_two = build_tree('[[6]]')
+    packets_arr.append(divider_one)
+    packets_arr.append(divider_two)
+    packets_arr.sort()
+    print((packets_arr.index(divider_one)+1)*(packets_arr.index(divider_two)+1))
     
 if __name__ == '__main__':
     part_one_solution()
+    part_two_solution()
