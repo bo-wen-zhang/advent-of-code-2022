@@ -28,7 +28,17 @@ def part_two():
             total += max_value
             del elves[elves.index(max_value)]
         print(f'The top three Elves are carrying {total} calories in total.')
+        
+def part_one_redone():
+    with open('input.txt') as input_file:
+        print(max([sum([int(cal) for cal in elf.split('\n')]) for elf in input_file.read().split('\n\n')]))
+
+def part_two_redone():
+    with open('input.txt') as input_file:
+        print(sum(sorted([sum([int(cal) for cal in elf.split('\n')]) for elf in input_file.read().split('\n\n')])[-3:]))
 
 if __name__ == "__main__":
     part_one()
     part_two()
+    part_one_redone()
+    part_two_redone()
