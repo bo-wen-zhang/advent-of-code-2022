@@ -14,7 +14,6 @@ def part_one_solution():
             numbers.insert(new_index, (value, order))
         
     index_of_zero = [index for index, item in enumerate(numbers) if item[0] == 0].pop()
-    print(index_of_zero)
     print(numbers[(index_of_zero+1000)%length][0]+numbers[(index_of_zero+2000)%length][0]+numbers[(index_of_zero+3000)%length][0])
     
 def part_two_solution():
@@ -33,7 +32,6 @@ def part_two_solution():
                 numbers.insert(new_index, (value, order))
         
     index_of_zero = [index for index, item in enumerate(numbers) if item[0] == 0].pop()
-    print(index_of_zero)
     print(numbers[(index_of_zero+1000)%length][0]+numbers[(index_of_zero+2000)%length][0]+numbers[(index_of_zero+3000)%length][0])
     
 if __name__ == '__main__':
